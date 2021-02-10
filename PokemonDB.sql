@@ -11,7 +11,7 @@ CREATE TABLE `Users` (
 
 CREATE TABLE `types` (
   `type_ID` int PRIMARY KEY,
-  `type` varchar(10)
+  `typeName` varchar(10)
 );
 
 CREATE TABLE `abilities` (
