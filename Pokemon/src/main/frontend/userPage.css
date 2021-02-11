@@ -1,3 +1,9 @@
+body {
+  color: #fff;
+  background: #63738a;
+  font-family: "Roboto", sans-serif;
+}
+
 .item1 {
   grid-area: header;
 }
