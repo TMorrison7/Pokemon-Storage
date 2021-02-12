@@ -8,7 +8,7 @@ $("#submitButton").click(function () {
     $.ajax({
         type: "POST",
         url: "http://localhost:8080/Register",
-        data: {"UserName":userName, "Password":password},
+        data: JSON.stringify({"username":userName, "password":password}),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function(data){alert(data);},
