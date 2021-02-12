@@ -4,7 +4,7 @@ CREATE DATABASE PokemonDB;
 use PokemonDB;
 
 CREATE TABLE `Users` (
-  `user_ID` int PRIMARY KEY,
+  `user_ID` int PRIMARY KEY auto_increment,
   `userName` varchar(20),
   `password` varchar(20)
 );
