@@ -2,6 +2,7 @@ var userName = ""
 var password = ""
 $("#submitButton").click(function () { 
     userName = ($("input[name='username']").val()) 
+    password = ($("input[name='password']").val())
     localStorage.setItem("username",userName);
     //$.post( "http://localhost:8080/Register", {"UserName":userName, "Password":password} );
     $.ajax({
