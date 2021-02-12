@@ -4,8 +4,7 @@ import com.sg.Pokemon.Data.UserDatabase;
 import com.sg.Pokemon.Data.UserRepository;
 import com.sg.Pokemon.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,13 +23,13 @@ public class UserController implements UserRepository {
         return userDatabase.getAllUsers();
     }
 
-    @Override
-    public User getUserById(int id) {
+    @GetMapping("/Users/{id}")
+    public User getUserById(@PathVariable int id) {
         return userDatabase.getUserById(id);
     }
 
-    @Override
-    public User addUser(User user) {
+    @PostMapping("/Register")
+    public User addUser(@RequestBody User user) {
         return userDatabase.addUser(user);
     }
 

@@ -5,15 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import sun.jvm.hotspot.utilities.RBNode;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-
+//Make an API takes
 @Repository
 public class UserDatabase implements UserRepository {
 
@@ -24,27 +21,29 @@ public class UserDatabase implements UserRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Random rand = new Random();
     public String sql;
     @Override
     public List<User> getAllUsers() {
-        sql = "";
+        sql = "Select * from users;";
         List<User> users = jdbcTemplate.query(sql, new UserMapper());
         return users;
     }
 
     @Override
     public User getUserById(int id) {
-        String sql = "" + id;
+        String sql = "Select * from users where user_id = " + id;
         User user = jdbcTemplate.queryForObject(sql, new UserMapper());
         return user;
     }
 
     @Override
     public User addUser(User user) {
-        sql = "";
-        jdbcTemplate.update(sql);
-        return null;
+
+        String username = user.getUsername();
+        String password = user.getPassword();
+        sql = "Insert into users(username,password) values (?,?)";
+        jdbcTemplate.update(sql, username, password);
+        return user;
     }
 
     private static final class UserMapper implements RowMapper<User> {
