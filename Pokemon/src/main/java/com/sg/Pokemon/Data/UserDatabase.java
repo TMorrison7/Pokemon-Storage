@@ -46,6 +46,13 @@ public class UserDatabase implements UserRepository {
         return user;
     }
 
+    @Override
+    public User login(User user) {
+        sql = "select * from users where username = \"" + user.getUsername() + "\" and password = \""+ user.getPassword() +"\";";
+        user = jdbcTemplate.queryForObject(sql, new UserMapper());
+        return user;
+    }
+
     private static final class UserMapper implements RowMapper<User> {
 
         @Override
