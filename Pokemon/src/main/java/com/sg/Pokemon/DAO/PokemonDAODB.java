@@ -120,14 +120,14 @@ public class PokemonDAODB implements PokemonDAO{
 
 
     @Override
-    public List<Pokemon> getPokemonByUser(int user_ID) {
+    public List<Pokemon> getPokemonByUser(String username) {
         // Surround in try-catch block to catch any errors.
         try {
             // Use the same command normally used for retrieving these
             // values in SQL, and assign it to a String.
-            final String SELECT_POKEMON_BY_USER = "SELECT * FROM pokemon WHERE user_ID = ?";
+            final String SELECT_POKEMON_BY_USER = "Select unique_ID, pokemon.poke_ID, pokemon.user_ID, level, ability_ID, move_ID1, move_ID2, move_ID3, move_ID4, hp, attack, defense, speed, spAttack, spDefense FROM pokemon " +  "INNER JOIN users ON pokemon.user_ID = users.user_ID WHERE userName = ?";
             // Return the game retrieved.
-            List<Pokemon> pokemon = jdbc.query(SELECT_POKEMON_BY_USER, new PokemonMapper(), user_ID);
+            List<Pokemon> pokemon = jdbc.query(SELECT_POKEMON_BY_USER, new PokemonMapper(), username);
             return pokemon;
         } catch(DataAccessException ex) {
             // Return null, if something went wrong.

@@ -8,7 +8,7 @@ public interface PokemonDAO {
 
     List<Pokemon> getAllPokemon();
     Pokemon getPokemonByUniqueID(int unique_ID);
-    List<Pokemon> getPokemonByUser(int user_ID);
+    List<Pokemon> getPokemonByUser(String username);
     Type getTypeByTypeID(int type_ID);
     List<Type> getTypeByPokemonID(int poke_ID);
     Ability getPokemonAbilityByAbilityID(int ability_ID);

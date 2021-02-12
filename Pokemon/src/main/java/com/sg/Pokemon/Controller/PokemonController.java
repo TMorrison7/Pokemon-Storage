@@ -20,9 +20,9 @@ public class PokemonController {
         return pokemon.getAllPokemon();
     }
 
-    @GetMapping("/users/{user_id}")
-    public List<Pokemon> getPokemonByUser(@PathVariable("user_id") int userID) {
-        return pokemon.getPokemonByUser(userID);
+    @GetMapping("/users/{userName}")
+    public List<Pokemon> getPokemonByUser(@PathVariable("userName") String userName) {
+        return pokemon.getPokemonByUser(userName);
     }
     @GetMapping("/pokemon/{unique_id}")
     public Pokemon getPokemonByUniqueID(@PathVariable("unique_id") int uniqueID) {

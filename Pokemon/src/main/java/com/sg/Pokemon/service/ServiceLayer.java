@@ -23,8 +23,8 @@ public Pokemon getPokemonByUniqueID(int unique_ID) {
     return pokemon_unique;
 }
 
-public List<Pokemon> getPokemonByUser(int user_ID) {
-    List<Pokemon> userPokemon = pokemonDAO.getPokemonByUser(user_ID);
+public List<Pokemon> getPokemonByUser(String userName) {
+    List<Pokemon> userPokemon = pokemonDAO.getPokemonByUser(userName);
     return userPokemon;
 }
 
