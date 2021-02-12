@@ -6,7 +6,7 @@ $("#submitButton").click(function () {
     localStorage.setItem("username",userName);
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/Register",
+        url: "http://localhost:8080/Login",
         data: JSON.stringify({"username":userName, "password":password}),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
