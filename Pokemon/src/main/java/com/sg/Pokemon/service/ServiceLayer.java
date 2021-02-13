@@ -68,6 +68,11 @@ public Names getPokemonIDByName(String name) {
         return na;
     }
 
+public Pokemon addPokemon(Pokemon pokemon) {
+    pokemon.setUserID(pokemon.getUserID());
+    pokemonDAO.addPokemon(pokemon);
+    return pokemon;
+}
 
 public Pokemon update(Pokemon pokemon) {
 pokemonDAO.updatePokemon(pokemon);

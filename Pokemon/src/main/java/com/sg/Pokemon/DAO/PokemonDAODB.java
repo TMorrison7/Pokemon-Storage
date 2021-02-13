@@ -21,12 +21,11 @@ public class PokemonDAODB implements PokemonDAO{
 
     public static final class PokemonMapper implements RowMapper<Pokemon> {
 
-        // This method is uses an interface to map rows of a result set from the game table.
+
         @Override
         public Pokemon mapRow(ResultSet rs, int index) throws SQLException {
-            // Create a new Game
             Pokemon pk = new Pokemon();
-            // Retrieve all the attributes used to define the game table.
+
             pk.setUniqueID(rs.getInt("unique_ID"));
             pk.setPokeID(rs.getInt("poke_ID"));
             pk.setUserID(rs.getInt("user_ID"));
@@ -43,7 +42,7 @@ public class PokemonDAODB implements PokemonDAO{
             pk.setSpAttack(rs.getInt("spAttack"));
             pk.setSpDefense(rs.getInt("spDefense"));
 
-            // Return the newly created game.
+
             return pk;
         }
     }
@@ -96,24 +95,22 @@ public class PokemonDAODB implements PokemonDAO{
 
     @Override
     public List<Pokemon> getAllPokemon() {
-        // Use the same command normally used for retrieving these
-        // values in SQL, and assign it to a String.
+
         final String SELECT_ALL_POKEMON = "SELECT * FROM pokemon";
-        // Return the list of games retrieved.
+
         return jdbc.query(SELECT_ALL_POKEMON, new PokemonMapper());
     }
 
     @Override
     public Pokemon getPokemonByUniqueID(int unique_ID) {
-        // Surround in try-catch block to catch any errors.
+
         try {
-            // Use the same command normally used for retrieving these
-            // values in SQL, and assign it to a String.
+
             final String SELECT_POKEMON_BY_ID = "SELECT * FROM pokemon WHERE unique_ID = ?";
-            // Return the game retrieved.
+
             return jdbc.queryForObject(SELECT_POKEMON_BY_ID, new PokemonMapper(), unique_ID);
         } catch(DataAccessException ex) {
-            // Return null, if something went wrong.
+
             return null;
         }
     }
@@ -121,16 +118,15 @@ public class PokemonDAODB implements PokemonDAO{
 
     @Override
     public List<Pokemon> getPokemonByUser(String username) {
-        // Surround in try-catch block to catch any errors.
+
         try {
-            // Use the same command normally used for retrieving these
-            // values in SQL, and assign it to a String.
+
             final String SELECT_POKEMON_BY_USER = "Select unique_ID, pokemon.poke_ID, pokemon.user_ID, level, ability_ID, move_ID1, move_ID2, move_ID3, move_ID4, hp, attack, defense, speed, spAttack, spDefense FROM pokemon " +  "INNER JOIN users ON pokemon.user_ID = users.user_ID WHERE userName = ?";
-            // Return the game retrieved.
+
             List<Pokemon> pokemon = jdbc.query(SELECT_POKEMON_BY_USER, new PokemonMapper(), username);
             return pokemon;
         } catch(DataAccessException ex) {
-            // Return null, if something went wrong.
+
             return null;
         }
     }
@@ -157,7 +153,6 @@ public class PokemonDAODB implements PokemonDAO{
                     "RIGHT JOIN pokemon ON abilities.ability_ID = pokemon.ability_ID WHERE poke_ID = ?";
             return jdbc.queryForObject (SELECT_POKEMON_ABILITY, new AbilityMapper(), poke_ID);
         } catch (DataAccessException ex) {
-            // Return null, if something went wrong.
             return null;
         }
     }
@@ -182,7 +177,6 @@ public class PokemonDAODB implements PokemonDAO{
             final String SELECT_POKEMON_MOVE = "SELECT move_ID, moveName FROM moves " + "RIGHT JOIN pokemon ON moves.move_ID = pokemon.move_ID1 OR moves.move_ID = pokemon.move_ID2 OR moves.move_ID = pokemon.move_ID3 OR moves.move_ID = pokemon.move_ID4 WHERE unique_ID = ?";
             return jdbc.query (SELECT_POKEMON_MOVE, new MovesMapper(), unique_ID);
         } catch (DataAccessException ex) {
-            // Return null, if something went wrong.
             return null;
         }
     }
@@ -191,10 +185,8 @@ public class PokemonDAODB implements PokemonDAO{
     public Names getPokemonNameByID(int unique_ID) {
         try {
             final String SELECT_POKEMON_BY_ID = "SELECT name FROM pokemonNames " + "INNER JOIN pokemon ON pokemonNames.poke_ID = pokemon.poke_ID WHERE unique_ID = ?";
-            // Return the game retrieved.
             return jdbc.queryForObject(SELECT_POKEMON_BY_ID, new NamesMapper(), unique_ID);
     } catch (DataAccessException ex) {
-            // Return null, if something went wrong.
             return null;
         }
     }
@@ -205,7 +197,6 @@ public class PokemonDAODB implements PokemonDAO{
         final String SELECT_POKEMON_BY_NAME = "SELECT poke_ID FROM pokemonNames WHERE name = ?";
         return jdbc.queryForObject(SELECT_POKEMON_BY_NAME, new NamesMapper2(), name);
     } catch (DataAccessException ex) {
-            // Return null, if something went wrong.
             return null;
         }
     }
@@ -215,13 +206,8 @@ public class PokemonDAODB implements PokemonDAO{
     @Override
     @Transactional
     public Pokemon addPokemon(Pokemon pokemon) {
-        // Use the same command used for inserting values in a table in SQL.
-        // (Note: We are only adding one value, as the other two values have default values
-        // (made alongside a newly created Game).
-        final String INSERT_POKEMON = "INSERT INTO pokemon(unique_ID, poke_ID, user_ID, level, ability_ID, move_ID1, move_ID2, move_ID3, move_ID4, hp, attack, defense, speed, spAttack, spDefense) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        // Update the database to reflect these changes.
+        final String INSERT_POKEMON = "INSERT INTO pokemon(poke_ID, user_ID, level, ability_ID, move_ID1, move_ID2, move_ID3, move_ID4, hp, attack, defense, speed, spAttack, spDefense) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbc.update(INSERT_POKEMON,
-                pokemon.getUniqueID(),
                 pokemon.getPokeID(),
                 pokemon.getUserID(),
                 pokemon.getLevel(),
@@ -237,21 +223,14 @@ public class PokemonDAODB implements PokemonDAO{
                 pokemon.getSpAttack(),
                 pokemon.getSpDefense()
         );
-        // Make sure that this id has the proper value to match the game_id's sequential order,
-        // by retrieving the ID of the last value inserted into the table, before this one.
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-        // Set the game's id to the value above.
         pokemon.setUniqueID(newId);
-        // Return the newly created game.
         return pokemon;
     }
 
     @Override
     public void updatePokemon(Pokemon pokemon) {
-        // Update only the status (the game's current progress) of a specific game,
-        // as that will be the only value that needs to be changed.
         final String UPDATE_GAME = "UPDATE pokemon SET level = ?, hp = ?, attack = ?, defense = ?, speed = ?, spAttack = ?, spDefense = ?, move_ID1 = ?, move_ID2 = ?, move_ID3 = ?, move_ID4 = ? WHERE unique_ID = ?";
-        // Update the database.
         jdbc.update(UPDATE_GAME,
                 pokemon.getLevel(),
                 pokemon.getHP(),

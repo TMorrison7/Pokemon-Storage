@@ -62,9 +62,13 @@ public class PokemonController {
     public Names getPokemonIDByName(@PathVariable("name") String name) {
         return pokemon.getPokemonIDByName(name);
     }
-    @PostMapping("/alter")
+    @PutMapping("/alter")
     public Pokemon updatePokemon(@RequestBody Pokemon poke) {
         return pokemon.update(poke);
+    }
+    @PostMapping("/add")
+    public Pokemon addPokemon(@RequestBody Pokemon poke) {
+        return pokemon.addPokemon(poke);
     }
     @DeleteMapping("/pokemon/{unique_ID}")
         public void deletePokemon(@PathVariable("unique_ID") int uniqueID)  {
