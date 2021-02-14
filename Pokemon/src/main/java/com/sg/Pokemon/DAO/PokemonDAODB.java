@@ -66,12 +66,28 @@ public class PokemonDAODB implements PokemonDAO{
             return mv;
         }
     }
+    public static final class MovesMapper2 implements RowMapper<Moves> {
+        @Override
+        public Moves mapRow(ResultSet rs, int index) throws SQLException {
+            Moves mv = new Moves();
+            mv.setMove_ID(rs.getInt("move_ID"));
+            return mv;
+        }
+    }
     public static final class AbilityMapper implements RowMapper<Ability> {
         @Override
         public Ability mapRow(ResultSet rs, int index) throws SQLException {
             Ability ab = new Ability();
             ab.setAbility_ID(rs.getInt("ability_ID"));
             ab.setAbility(rs.getString("ability"));
+            return ab;
+        }
+    }
+    public static final class AbilityMapper2 implements RowMapper<Ability> {
+        @Override
+        public Ability mapRow(ResultSet rs, int index) throws SQLException {
+            Ability ab = new Ability();
+            ab.setAbility_ID(rs.getInt("ability_ID"));
             return ab;
         }
     }
@@ -140,11 +156,6 @@ public class PokemonDAODB implements PokemonDAO{
             return jdbc.query(SELECT_TYPE_BY_ID, new TypeMapper(), poke_ID);
     }
 
-    @Override
-    public Ability getPokemonAbilityByAbilityID(int ability_ID) {
-        final String SELECT_POKEMON_ABILITY = "SELECT * FROM abilities WHERE ability_ID = ?";
-        return jdbc.queryForObject (SELECT_POKEMON_ABILITY, new AbilityMapper(), ability_ID);
-    }
 
     @Override
     public Ability getPokemonAbilityByPokemonID(int poke_ID) {
@@ -158,17 +169,20 @@ public class PokemonDAODB implements PokemonDAO{
     }
 
     @Override
-    public Moves getPokemonMoveByID(int move_ID) {
-        final String SELECT_POKEMON_MOVE = "SELECT * FROM moves WHERE move_ID = ?";
-        return jdbc.queryForObject(SELECT_POKEMON_MOVE, new MovesMapper(), move_ID);
+    public Ability getPokemonAbilityIDByName(String ability_name) {
+            final String SELECT_POKEMON_ABILITY = "SELECT ability_ID FROM abilities WHERE ability = ?";
+            return jdbc.queryForObject (SELECT_POKEMON_ABILITY, new AbilityMapper2(), ability_name);
     }
 
     @Override
-    public Type getTypeByTypeID(int type_ID) {
-        final String SELECT_POKEMON_TYPE = "SELECT * FROM types where type_ID = ?";
-        return jdbc.queryForObject(SELECT_POKEMON_TYPE, new TypeMapper(), type_ID);
+    public Moves getPokemonMoveIDByName(String move_name) {
+        try {
+            final String SELECT_POKEMON_MOVE = "SELECT move_ID FROM moves WHERE moveName = ?";
+            return jdbc.queryForObject (SELECT_POKEMON_MOVE, new MovesMapper2(), move_name);
+        } catch (DataAccessException ex) {
+            return null;
+        }
     }
-
 
 
     @Override

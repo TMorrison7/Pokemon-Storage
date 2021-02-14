@@ -28,19 +28,10 @@ public List<Pokemon> getPokemonByUser(String userName) {
     return userPokemon;
 }
 
-public Type getTypeByTypeID(int type_ID) {
-    Type ty = pokemonDAO.getTypeByTypeID(type_ID);
-    return ty;
-}
 
 public List<Type> getTypeByPokemonID(int poke_ID) {
     List<Type> type = pokemonDAO.getTypeByPokemonID(poke_ID);
     return type;
-}
-
-public Ability getPokemonAbilityByAbilityID(int ability_ID) {
-    Ability ab = pokemonDAO.getPokemonAbilityByAbilityID(ability_ID);
-    return ab;
 }
 
 public Ability getPokemonAbilityByPokemonID(int poke_ID) {
@@ -58,8 +49,13 @@ public Names getPokemonNameByID(int unique_ID) {
     return name;
 }
 
-public Moves getPokemonMovesByID(int move_ID) {
-    Moves mo = pokemonDAO.getPokemonMoveByID(move_ID);
+public Ability getPokemonAbilityIDByName(String ability_name) {
+    Ability ab = pokemonDAO.getPokemonAbilityIDByName(ability_name);
+    return ab;
+}
+
+public Moves getPokemonMoveIDByName(String move_name) {
+    Moves mo = pokemonDAO.getPokemonMoveIDByName(move_name);
     return mo;
 }
 

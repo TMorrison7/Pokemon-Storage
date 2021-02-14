@@ -32,25 +32,21 @@ public class PokemonController {
     public List<Type> getPokemonByTypeID(@PathVariable("poke_ID") int pokeID) {
         return pokemon.getTypeByPokemonID(pokeID);
     }
-    @GetMapping("/types/byType/{type_ID}")
-    public Type getPokemonByType(@PathVariable("type_ID") int typeID) {
-        return pokemon.getTypeByTypeID(typeID);
-    }
     @GetMapping("/pokemon/byMoves/{unique_ID}")
     public List<Moves> getPokemonByMoves(@PathVariable("unique_ID") int uniqueID) {
         return pokemon.getPokemonMoves(uniqueID);
     }
-    @GetMapping("/moves/byMoves/{move_ID}")
-    public Moves getPokemonByMoveID(@PathVariable("move_ID") int moveID) {
-        return pokemon.getPokemonMovesByID(moveID);
+    @GetMapping("/moves/{moveName}")
+    public Moves getPokemonMoveIDByName(@PathVariable("moveName") String moveName) {
+        return pokemon.getPokemonMoveIDByName(moveName);
     }
     @GetMapping("/pokemon/byAbility/{poke_ID}")
     public Ability getPokemonAbilityByID(@PathVariable("poke_ID") int pokeID) {
         return pokemon.getPokemonAbilityByPokemonID(pokeID);
     }
-    @GetMapping("/abilities/byAbility/{ability_ID}")
-    public Ability getPokemonAbilityByAbilityID(@PathVariable("ability_ID") int abilityID) {
-        return pokemon.getPokemonAbilityByAbilityID(abilityID);
+    @GetMapping("/abilities/{ability}")
+    public Ability getPokemonAbilityIDByName(@PathVariable("ability") String ability) {
+        return pokemon.getPokemonAbilityIDByName(ability);
     }
 
     @GetMapping("/pokemonNames/id/{poke_ID}")
