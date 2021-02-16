@@ -32,7 +32,7 @@ public class UserController implements UserRepository {
 
     @CrossOrigin
     @PostMapping("/Login")
-    public User login(@RequestBody User user){
+    public User login(@RequestBody User user) {
         return userDatabase.login(user);
     }
 
@@ -41,6 +41,5 @@ public class UserController implements UserRepository {
     public User addUser(@RequestBody User user) {
         return userDatabase.addUser(user);
     }
-
 
 }
