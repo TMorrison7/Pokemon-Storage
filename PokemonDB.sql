@@ -4,9 +4,9 @@ CREATE DATABASE PokemonDB;
 use PokemonDB;
 
 CREATE TABLE `Users` (
-  `user_ID` int PRIMARY KEY,
-  `userName` varchar(20),
-  `password` varchar(20)
+  `user_ID` int PRIMARY KEY AUTO_INCREMENT,
+  `userName` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL
 );
 
 CREATE TABLE `types` (
@@ -2111,7 +2111,7 @@ VALUES
 
 INSERT INTO Pokemon (unique_ID, poke_ID, user_ID, level, ability_ID, move_ID1, move_ID2, move_ID3, move_ID4, hp, attack, defense, speed, spAttack, spDefense)
 VALUES (1, 3, 1, 5, 2, 1, 2, 3, 4, 255, 150, 45, 67, 123, 145),
-(2, 6, 1, 8, 3, 1, 2, 3, 4, 255, 150, 45, 67, 123, 145);
+(2, 6, 1, 8, 3, 1, 2, 3, null, 255, 150, 45, 67, 123, 145);
 
 UPDATE pokemonNames
 SET name = CONCAT(UCASE(LEFT(name, 1)), SUBSTRING(name, 2));
@@ -2119,4 +2119,5 @@ SET name = CONCAT(UCASE(LEFT(name, 1)), SUBSTRING(name, 2));
 UPDATE abilities
 SET ability = CONCAT(UCASE(LEFT(ability, 1)), SUBSTRING(ability, 2));
 
-Select * from pokemonNames;
+UPDATE moves
+SET moveName = CONCAT(UCASE(LEFT(moveName, 1)), SUBSTRING(moveName, 2));

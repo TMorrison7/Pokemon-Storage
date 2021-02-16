@@ -32,7 +32,7 @@ $.ajax({
                 } else {
                 items += '</td>';
               }
-                items += '<td>' + '<button type="button" id="view' + uniqueID + '" class="btn btn-primary">Additional Info</button>' + '</td>';
+                items += '<td>' + '<button type="button" id=' + uniqueID + ' class="btn btn-primary" onClick="viewInfo('+uniqueID+')">Additional Info</button>' + '</td>';
                 items += '<td>' + '<button type="button" id="edit' + uniqueID + '" class="btn btn-primary">Edit</button>' + '</td>';
                 items += '<td>' + '<button type="button" id="delete' + uniqueID + '" class="btn btn-primary">Delete</button>' + '</td>';
                 items += '</tr>';
@@ -135,4 +135,9 @@ function getType2ByPokemonID(id) {
   }
   });
   return pokemon_type2;
+}
+
+function viewInfo(unique_ID) {
+  window.location.href = "info.html";
+  localStorage.setItem("uniqueID", unique_ID);
 }
