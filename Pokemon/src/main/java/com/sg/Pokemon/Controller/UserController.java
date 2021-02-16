@@ -28,14 +28,16 @@ public class UserController implements UserRepository {
         return userDatabase.getUserById(id);
     }
 
+    @CrossOrigin
     @PostMapping("/Login")
-    public User login(@RequestBody User user){
+    public User login(@RequestBody User user) {
         return userDatabase.login(user);
     }
+
+    @CrossOrigin
     @PostMapping("/Register")
     public User addUser(@RequestBody User user) {
         return userDatabase.addUser(user);
     }
-
 
 }
