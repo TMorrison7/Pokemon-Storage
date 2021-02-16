@@ -198,7 +198,7 @@ public class PokemonDAODB implements PokemonDAO{
     @Override
     public Names getPokemonNameByID(int unique_ID) {
         try {
-            final String SELECT_POKEMON_BY_ID = "SELECT name FROM pokemonNames " + "INNER JOIN pokemon ON pokemonNames.poke_ID = pokemon.poke_ID WHERE unique_ID = ?";
+            final String SELECT_POKEMON_BY_ID = "SELECT name FROM pokemonNames WHERE poke_ID = ?";
             return jdbc.queryForObject(SELECT_POKEMON_BY_ID, new NamesMapper(), unique_ID);
     } catch (DataAccessException ex) {
             return null;

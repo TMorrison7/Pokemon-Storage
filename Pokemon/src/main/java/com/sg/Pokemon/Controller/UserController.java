@@ -18,20 +18,25 @@ public class UserController implements UserRepository {
         this.userDatabase = userDatabase;
     }
 
+    @CrossOrigin
     @GetMapping("/Users")
     public List<User> getAllUsers() {
         return userDatabase.getAllUsers();
     }
 
+    @CrossOrigin
     @GetMapping("/Users/{id}")
     public User getUserById(@PathVariable int id) {
         return userDatabase.getUserById(id);
     }
 
+    @CrossOrigin
     @PostMapping("/Login")
     public User login(@RequestBody User user){
         return userDatabase.login(user);
     }
+
+    @CrossOrigin
     @PostMapping("/Register")
     public User addUser(@RequestBody User user) {
         return userDatabase.addUser(user);

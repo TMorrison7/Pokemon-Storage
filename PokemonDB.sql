@@ -60,24 +60,24 @@ CREATE TABLE `Pokemon` (
 
 INSERT INTO types (type_ID, typeName)
 VALUES
-(1,'normal'),
-(2,'fighting'),
-(3,'flying'),
-(4,'poison'),
-(5,'ground'),
-(6,'rock'),
-(7,'bug'),
-(8,'ghost'),
-(9,'steel'),
-(10,'fire'),
-(11,'water'),
-(12,'grass'),
-(13,'electric'),
-(14,'psychic'),
-(15,'ice'),
-(16,'dragon'),
-(17,'dark'),
-(18,'fairy');
+(1,'Normal'),
+(2,'Fighting'),
+(3,'Flying'),
+(4,'Poison'),
+(5,'Ground'),
+(6,'Rock'),
+(7,'Bug'),
+(8,'Ghost'),
+(9,'Steel'),
+(10,'Fire'),
+(11,'Water'),
+(12,'Grass'),
+(13,'Electric'),
+(14,'Psychic'),
+(15,'Ice'),
+(16,'Dragon'),
+(17,'Dark'),
+(18,'Fairy');
 
 Insert INTO Users (user_ID, username, password)
 VALUES(1, "dannyrig", "hello"),
@@ -2110,6 +2110,13 @@ VALUES
 (826,'eerie spell');
 
 INSERT INTO Pokemon (unique_ID, poke_ID, user_ID, level, ability_ID, move_ID1, move_ID2, move_ID3, move_ID4, hp, attack, defense, speed, spAttack, spDefense)
-VALUES (1, 1, 1, 5, 2, 1, 2, 3, 4, 255, 150, 45, 67, 123, 145),
-(2, 2, 2, 5, 3, 1, 2, 3, 4, 255, 150, 45, 67, 123, 145);
+VALUES (1, 3, 1, 5, 2, 1, 2, 3, 4, 255, 150, 45, 67, 123, 145),
+(2, 6, 1, 8, 3, 1, 2, 3, 4, 255, 150, 45, 67, 123, 145);
 
+UPDATE pokemonNames
+SET name = CONCAT(UCASE(LEFT(name, 1)), SUBSTRING(name, 2));
+
+UPDATE abilities
+SET ability = CONCAT(UCASE(LEFT(ability, 1)), SUBSTRING(ability, 2));
+
+Select * from pokemonNames;
