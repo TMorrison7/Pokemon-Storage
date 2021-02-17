@@ -35,5 +35,12 @@ $.getJSON("http://localhost:8080/store/pokemon/"+pokeID,
         $("#Special_Attack").val(data['spAttack']);
         $("#Special_Defense").val(data['spDefense']);
         
+        $.getJSON("http://localhost:8080/store/pokemon/byMoves/" + data['uniqueID'],
+            function (data2) {
+                $.each(data2, function (indexInArray, valueOfElement) { 
+                    $("#Move" + (indexInArray+1)).val(data2[indexInArray]['moveName']);
+                });
+            }
+        );
     }
 );
