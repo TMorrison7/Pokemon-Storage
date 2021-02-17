@@ -12,6 +12,11 @@ $('#body').empty();
 var itemList = $('#body');
 var userName = localStorage.getItem("username");
 
+$.fn.editPokemon = function (id){
+    localStorage.setItem("pokeID", id);
+    window.location.href = "Edit_Pokemon.html";
+}
+
 $.ajax({
         type: 'GET',
         url: 'http://localhost:8080/store/users/' + userName,
@@ -33,7 +38,7 @@ $.ajax({
                 items += '</td>';
               }
                 items += '<td>' + '<button type="button" id="view' + uniqueID + '" class="btn btn-primary">Additional Info</button>' + '</td>';
-                items += '<td>' + '<button type="button" id="edit' + uniqueID + '" class="btn btn-primary">Edit</button>' + '</td>';
+                items += '<td>' + '<button type="button" id="edit' + uniqueID + '" class="btn btn-primary" onClick="$(this).editPokemon('+uniqueID+')">Edit</button>' + '</td>';
                 items += '<td>' + '<button type="button" id="delete' + uniqueID + '" class="btn btn-primary">Delete</button>' + '</td>';
                 items += '</tr>';
                 itemList.append(items);
@@ -48,7 +53,6 @@ $.ajax({
             .text('Error calling web service. Please try again later.'));
     }
 });
-
 
 }
 
