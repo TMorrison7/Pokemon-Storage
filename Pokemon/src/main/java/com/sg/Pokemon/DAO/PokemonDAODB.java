@@ -47,6 +47,23 @@ public class PokemonDAODB implements PokemonDAO{
         }
     }
 
+    public static final class PokemonMapper2 implements RowMapper<Pokemon> {
+
+
+        @Override
+        public Pokemon mapRow(ResultSet rs, int index) throws SQLException {
+            Pokemon pk = new Pokemon();
+
+            pk.setUniqueID(rs.getInt("unique_ID"));
+            pk.setUserID(rs.getInt("user_ID"));
+            pk.setPokeID(rs.getInt("poke_ID"));
+            pk.setAbilityID(rs.getInt("ability_ID"));
+            pk.setLevel(rs.getInt("level"));
+
+            return pk;
+        }
+    }
+
     public static final class TypeMapper implements RowMapper<Type> {
         @Override
         public Type mapRow(ResultSet rs, int index) throws SQLException {
@@ -131,6 +148,14 @@ public class PokemonDAODB implements PokemonDAO{
         }
     }
 
+    @Override
+    public List<Pokemon> searchPokemon(int poke_ID) {
+            final String SEARCH = "Select user_ID, unique_ID, poke_ID, ability_ID, level from Pokemon WHERE poke_ID = ?";
+            List<Pokemon> pokemon = jdbc.query(SEARCH, new PokemonMapper2(), poke_ID);
+            return pokemon;
+    }
+
+
 
     @Override
     public List<Pokemon> getPokemonByUser(String username) {
@@ -160,8 +185,7 @@ public class PokemonDAODB implements PokemonDAO{
     @Override
     public Ability getPokemonAbilityByPokemonID(int poke_ID) {
         try {
-            final String SELECT_POKEMON_ABILITY = "SELECT abilities.ability_ID, ability FROM abilities " +
-                    "RIGHT JOIN pokemon ON abilities.ability_ID = pokemon.ability_ID WHERE poke_ID = ?";
+            final String SELECT_POKEMON_ABILITY = "SELECT ability_ID, ability FROM abilities WHERE ability_ID = ?";
             return jdbc.queryForObject (SELECT_POKEMON_ABILITY, new AbilityMapper(), poke_ID);
         } catch (DataAccessException ex) {
             return null;

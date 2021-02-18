@@ -56,6 +56,12 @@ public class PokemonController {
     public Ability getPokemonAbilityIDByName(@PathVariable("ability") String ability) {
         return pokemon.getPokemonAbilityIDByName(ability);
     }
+
+    @CrossOrigin
+    @GetMapping("/pokemon/search/{poke_ID}")
+    public List<Pokemon> search(@PathVariable("poke_ID") int pokeID) {
+        return pokemon.search(pokeID);
+    }
     @CrossOrigin
     @GetMapping("/pokemonNames/id/{poke_ID}")
     public Names getPokemonName(@PathVariable("poke_ID") int pokeID) {

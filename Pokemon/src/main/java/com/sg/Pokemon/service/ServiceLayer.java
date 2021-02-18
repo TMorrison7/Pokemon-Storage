@@ -28,6 +28,10 @@ public List<Pokemon> getPokemonByUser(String userName) {
     return userPokemon;
 }
 
+public List<Pokemon> search(int poke_ID) {
+    List<Pokemon> results = pokemonDAO.searchPokemon(poke_ID);
+    return results;
+}
 
 public List<Type> getTypeByPokemonID(int poke_ID) {
     List<Type> type = pokemonDAO.getTypeByPokemonID(poke_ID);

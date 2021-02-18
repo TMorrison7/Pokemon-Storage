@@ -50,17 +50,19 @@ $.ajax({
                 items += '<h2 class="text-center">' + "Moves" + '</h2>';
                 items += '<hr style="border-top:2px solid; width: 100px">';
                 items += '<br>';
+                if (getMove1ByPokemonID(uniqueID) != "" && getMove1ByPokemonID(uniqueID) != "N/A") {
                 items += '<h3 class="text-center">' + getMove1ByPokemonID(uniqueID) + '</h3>';
                 items += '<br>';
-                if (getMove2ByPokemonID(uniqueID) != "") {
+              }
+                if (getMove2ByPokemonID(uniqueID) != "" && getMove2ByPokemonID(uniqueID) != "N/A") {
                 items += '<h3 class="text-center">' + getMove2ByPokemonID(uniqueID) + '</h3>';
                 items += '<br>';
               }
-                if (getMove3ByPokemonID(uniqueID) != "") {
+                if (getMove3ByPokemonID(uniqueID) != "" && getMove3ByPokemonID(uniqueID) != "N/A") {
                 items += '<h3 class="text-center">' + getMove3ByPokemonID(uniqueID) + '</h3>';
                 items += '<br>';
               }
-                if (getMove4ByPokemonID(uniqueID) != "") {
+                if (getMove4ByPokemonID(uniqueID) != "" && getMove4ByPokemonID(uniqueID) != "N/A") {
                 items += '<h3 class="text-center">' + getMove4ByPokemonID(uniqueID) + '</h3>';
                 items += '<br>';
               }

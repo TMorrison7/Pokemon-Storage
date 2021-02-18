@@ -1023,6 +1023,7 @@ VALUES
 
 INSERT INTO abilities (ability_ID, ability)
 VALUES
+
 (1,'stench'),
 (2,'drizzle'),
 (3,'speed boost'),
@@ -1353,6 +1354,7 @@ VALUES
 
 INSERT INTO moves (move_ID, moveName)
 VALUES
+(0, 'N/A'),
 (1,'pound'),
 (2,'karate chop'),
 (3,'double slap'),
@@ -2111,7 +2113,8 @@ VALUES
 
 INSERT INTO Pokemon (unique_ID, poke_ID, user_ID, level, ability_ID, move_ID1, move_ID2, move_ID3, move_ID4, hp, attack, defense, speed, spAttack, spDefense)
 VALUES (1, 3, 1, 5, 2, 1, 2, 3, 4, 255, 150, 45, 67, 123, 145),
-(2, 6, 1, 8, 3, 1, 2, 3, null, 255, 150, 45, 67, 123, 145);
+(2, 6, 1, 8, 3, 17, 20, 31, 5, 255, 150, 45, 67, 123, 145),
+(3, 3, 2, 5, 2, 1, 2, 3, 4, 255, 150, 45, 67, 123, 145);
 
 UPDATE pokemonNames
 SET name = CONCAT(UCASE(LEFT(name, 1)), SUBSTRING(name, 2));
@@ -2121,3 +2124,5 @@ SET ability = CONCAT(UCASE(LEFT(ability, 1)), SUBSTRING(ability, 2));
 
 UPDATE moves
 SET moveName = CONCAT(UCASE(LEFT(moveName, 1)), SUBSTRING(moveName, 2));
+
+Select * from Pokemon;
