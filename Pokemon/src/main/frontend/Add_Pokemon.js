@@ -7,8 +7,17 @@ var pokemon_move4;
 var pokemon_id;
 
 $(document).ready(function () {
-var user = localStorage.getItem("userID");
+  var user = localStorage.getItem("userID");
+  $('#name').select2();
 });
+
+$.getJSON("http://localhost:8080/store/names",
+  function (data) {
+    $.each(data, function (indexInArray, valueOfElement) { 
+      $("#name").append("<option>"+valueOfElement['pokemonName']+"</option>");
+    });
+  }
+);
 
 function getMoveName1(name) {
   //pokemon_move1 = "";
