@@ -36,4 +36,8 @@ public interface PokemonDAO {
 
     void deletePokemon(int poke_ID);
 
+    List<Ability> getAllAbilities();
+
+    List<Moves> getAllMoves();
+
 }

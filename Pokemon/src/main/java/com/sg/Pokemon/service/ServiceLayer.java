@@ -23,6 +23,11 @@ public class ServiceLayer {
         return pokemons;
     }
 
+    public List<Ability> getAllAbilities() {
+        List<Ability> abilities = pokemonDAO.getAllAbilities();
+        return abilities;
+    }
+
     public Pokemon getPokemonByUniqueID(int unique_ID) {
         Pokemon pokemon_unique = pokemonDAO.getPokemonByUniqueID(unique_ID);
         return pokemon_unique;
@@ -86,6 +91,11 @@ public class ServiceLayer {
 
     public void deletePokemon(int unique_id) {
         pokemonDAO.deletePokemon(unique_id);
+    }
+
+    public List<Moves> getAllMoves() {
+        List<Moves> moves = pokemonDAO.getAllMoves();
+        return moves;
     }
 
 }

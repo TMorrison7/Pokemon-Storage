@@ -9,12 +9,35 @@ var pokemon_id;
 $(document).ready(function () {
   var user = localStorage.getItem("userID");
   $('#name').select2();
+  $('#Ability').select2();
+  $('#Move1').select2();
+  $('#Move2').select2();
+  $('#Move3').select2();
+  $('#Move4').select2();
 });
 
 $.getJSON("http://localhost:8080/store/names",
   function (data) {
     $.each(data, function (indexInArray, valueOfElement) { 
       $("#name").append("<option>"+valueOfElement['pokemonName']+"</option>");
+    });
+  }
+);
+
+$.getJSON("http://localhost:8080/store/abilities",
+  function (data) {
+    $.each(data, function (indexInArray, valueOfElement) { 
+      $("#Ability").append("<option>"+valueOfElement['ability']+"</option>");
+    });
+  }
+);
+$.getJSON("http://localhost:8080/store/moves",
+  function (data) {
+    $.each(data, function (indexInArray, valueOfElement) { 
+      $("#Move1").append("<option>"+valueOfElement['moveName']+"</option>");
+      $("#Move2").append("<option>"+valueOfElement['moveName']+"</option>");
+      $("#Move3").append("<option>"+valueOfElement['moveName']+"</option>");
+      $("#Move4").append("<option>"+valueOfElement['moveName']+"</option>");
     });
   }
 );

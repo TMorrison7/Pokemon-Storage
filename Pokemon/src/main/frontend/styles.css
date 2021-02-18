@@ -87,3 +87,7 @@ body {
 .signup-form form a:hover {
   text-decoration: underline;
 }
+
+.searchable {
+  min-width: 200px;
+}

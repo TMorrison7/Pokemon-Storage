@@ -27,6 +27,18 @@ public class PokemonController {
     }
 
     @CrossOrigin
+    @GetMapping("/abilities")
+    public List<Ability> getAllAbilities() {
+        return pokemon.getAllAbilities();
+    }
+
+    @CrossOrigin
+    @GetMapping("/moves")
+    public List<Moves> getAllMoves() {
+        return pokemon.getAllMoves();
+    }
+
+    @CrossOrigin
     @GetMapping("/users/{userName}")
     public List<Pokemon> getPokemonByUser(@PathVariable("userName") String userName) {
         return pokemon.getPokemonByUser(userName);

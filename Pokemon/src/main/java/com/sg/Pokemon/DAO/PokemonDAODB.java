@@ -271,4 +271,18 @@ public class PokemonDAODB implements PokemonDAO {
 
         return jdbc.query(SELECT_ALL_POKEMON, new NamesMapper());
     }
+
+    @Override
+    public List<Ability> getAllAbilities() {
+        final String SELECT_ALL_POKEMON = "SELECT * FROM abilities";
+
+        return jdbc.query(SELECT_ALL_POKEMON, new AbilityMapper());
+    }
+
+    @Override
+    public List<Moves> getAllMoves() {
+        final String SELECT_ALL_POKEMON = "SELECT * FROM moves";
+
+        return jdbc.query(SELECT_ALL_POKEMON, new MovesMapper());
+    }
 }
