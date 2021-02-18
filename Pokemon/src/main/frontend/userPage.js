@@ -19,6 +19,7 @@ $('#body').empty();
 var itemList = $('#body');
 var userName = localStorage.getItem("username");
 
+<<<<<<< HEAD
 $.fn.editPokemon = function (poke_id, unique_id, ability_id){
     localStorage.setItem("pokeID", poke_id);
     localStorage.setItem("ability", ability_id);
@@ -27,6 +28,13 @@ $.fn.editPokemon = function (poke_id, unique_id, ability_id){
 }
 
 
+=======
+$.fn.editPokemon = function (id){
+    localStorage.setItem("pokeID", id);
+    window.location.href = "Edit_Pokemon.html";
+}
+
+>>>>>>> 177c9cf963436be095c205ad8c524c80f30eec5c
 $.ajax({
         type: 'GET',
         url: 'http://localhost:8080/store/users/' + userName,
@@ -47,9 +55,15 @@ $.ajax({
                 } else {
                 items += '</td>';
               }
+<<<<<<< HEAD
                 items += '<td>' + '<button type="button" id="edit' + uniqueID + '" class="btn btn-primary" onClick="$(this).editPokemon('+ pokeID + ", " + uniqueID + ", " + ability + ')">Edit</button>' + '</td>';
                 items += '<td>' + '<button type="button" id=' + uniqueID + ' class="btn btn-primary" onClick="viewInfo('+uniqueID+')">Additional Info</button>' + '</td>';
                 items += '<td>' + '<button type="button" id="delete' + uniqueID + '" class="btn btn-primary" onClick="remove('+uniqueID+')">Delete</button>' + '</td>';
+=======
+                items += '<td>' + '<button type="button" id="edit' + uniqueID + '" class="btn btn-primary" onClick="$(this).editPokemon('+uniqueID+')">Edit</button>' + '</td>';
+                items += '<td>' + '<button type="button" id=' + uniqueID + ' class="btn btn-primary" onClick="viewInfo('+uniqueID+')">Additional Info</button>' + '</td>';
+                items += '<td>' + '<button type="button" id="delete' + uniqueID + '" class="btn btn-primary">Delete</button>' + '</td>';
+>>>>>>> 177c9cf963436be095c205ad8c524c80f30eec5c
                 items += '</tr>';
                 itemList.append(items);
             })
@@ -63,7 +77,6 @@ $.ajax({
             .text('Error calling web service. Please try again later.'));
     }
 });
-
 
 }
 
