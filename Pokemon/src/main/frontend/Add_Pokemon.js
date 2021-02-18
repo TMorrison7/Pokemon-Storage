@@ -31,6 +31,7 @@ $.getJSON("http://localhost:8080/store/abilities",
     });
   }
 );
+
 $.getJSON("http://localhost:8080/store/moves",
   function (data) {
     $.each(data, function (indexInArray, valueOfElement) { 
