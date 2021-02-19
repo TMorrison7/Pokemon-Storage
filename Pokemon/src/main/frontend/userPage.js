@@ -275,16 +275,20 @@ function goAdd(userID) {
 
 $("#add").click(function (event) {
   var userName = localStorage.getItem("username");
-
+  
   $.ajax({
-          type: 'GET',
-          url: 'http://localhost:8080/store/users/' + userName,
-          success: function(itemArray) {
-              $.each(itemArray, function(index, user){
-                var userID = user.userID;
-                goAdd(userID);
+    type: 'GET',
+    url: 'http://localhost:8080/Users',
+    success: function(itemArray) {
+        $.each(itemArray, function(index, user){
+          var username = user.username;
+          if (username == userName) {
+          var userID = user.user_Id;
+          goAdd(userID);
+        }
 })
 },
+
 error: function() {
     $('#errorMessages')
         .append($('<li>')
